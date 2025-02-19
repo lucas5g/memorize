@@ -1,9 +1,12 @@
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
 
-export function Input({...props}: Props) {
+export function Input({ label, ...props }: Readonly<Props>) {
   return (
-    <input
-    {...props}
-    />
-  )
+    <div>
+      <label>{label}</label>
+      <input {...props} />
+    </div>
+  );
 }
