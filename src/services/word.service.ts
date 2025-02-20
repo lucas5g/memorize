@@ -1,16 +1,28 @@
-import { prisma } from '@/libs/prisma';
+import { elevenLabs } from '@/utils/eleven-labs';
+import { prisma } from '@/utils/prisma';
 import { z } from 'zod';
 
 const createSchema = z.object({
   name: z.string(),
   translate: z.string(),
+
 });
 
 const updateSchema = createSchema.partial();
 export class WordService {
-  create(data: z.infer<typeof createSchema>) {
-    return prisma.word.create({
-      data: createSchema.parse(data),
+  async create(body: z.infer<typeof createSchema>) {
+    
+    const data = createSchema.parse(body)
+
+    return prisma.word.upsert({
+      create:{
+        ...data,
+        audio: await elevenLabs(data.translate)
+      },
+      update: data,
+      where: {
+        name: data.name,  
+      }
     });
   }
   findAll() {
@@ -31,7 +43,7 @@ export class WordService {
       data: updateSchema.parse(data),
     });
   }
-  delete(id: number) {
+  remove(id: number) {
     return prisma.word.delete({
       where: {
         id,

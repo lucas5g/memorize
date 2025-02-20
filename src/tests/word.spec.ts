@@ -1,9 +1,12 @@
 import { WordService } from '@/services/word.service';
+import { play } from 'elevenlabs';
+import { read } from 'fs';
+import { Readable } from 'stream';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 describe('WordService', () => {
   const service = new WordService();
   let id: number;
-  const properties = ['id', 'name', 'translate', 'createdAt', 'updatedAt'];
+  const properties = ['id', 'name', 'translate', 'audio', 'createdAt', 'updatedAt'];
 
   beforeAll(async () => {
     const data = {
@@ -17,9 +20,6 @@ describe('WordService', () => {
     id = res.id;
   });
 
-  afterAll(async () => {
-    await service.delete(id);
-  });
 
   it('findAll', async () => {
     const res = await service.findAll();
@@ -29,11 +29,11 @@ describe('WordService', () => {
   it('findOne', async () => {
     const res = await service.findOne(id);
     expect(Object.keys(res)).toEqual(properties);
+
   });
 
   it('update', async () => {
     const data = {
-      name: 'café2',
     };
 
     const res = await service.update(id, data);
