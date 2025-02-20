@@ -1,9 +1,11 @@
 import AudioPlayer from '@/components/AudioPlayer';
 import { Card } from '@/components/Card';
+import { Input } from '@/components/Input';
+import { Table } from '@/components/Table';
 import { WordService } from '@/services/word.service';
 
 const wordService = new WordService();
-export  default async function Home() {
+export default async function Home() {
 
   const words = await wordService.findAll()
 
@@ -15,28 +17,17 @@ export  default async function Home() {
         <h1>Teste card</h1>
       </Card>
 
-      <Card>
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Tradução</th>
-            </tr>
-          </thead>
-          <tbody>
-            {words.map((word) => (
-              <tr key={word.id}>
-                <td>{word.name}</td>
-                <td>{word.translate}</td>
-                <td>
-                  <AudioPlayer audioBuffer={word.audio} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-          
-        </table>
-      </Card>
+      <main className='flex gap-4'>
+
+        <Card>
+          <form className='space-y-4'>
+            <Input label="Nome" />
+            <Input label="Tradução" />
+            <button type="submit">Enviar</button>
+          </form>
+        </Card>
+        <Table words={words} />
+      </main>
     </>
   );
 }

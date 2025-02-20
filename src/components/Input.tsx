@@ -4,7 +4,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ label, ...props }: Readonly<Props>) {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <label>{label}</label>
       <input {...props} />
     </div>

@@ -10,8 +10,8 @@ describe('WordService', () => {
 
   beforeAll(async () => {
     const data = {
-      name: 'café',
-      translate: 'coffee',
+      name: 'feriado',
+      translate: 'holiday',
     };
 
     const res = await service.create(data);
