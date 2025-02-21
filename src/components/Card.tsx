@@ -1,7 +1,7 @@
 export function Card({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="bg-gray-900 p-2 rounded w-full">
-      <div className="card-body">{children}</div>
+    <div className="bg-gray-900 p-5 border border-gray-600 w-full rounded">
+      {children}
     </div>
   );
 }

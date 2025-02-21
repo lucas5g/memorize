@@ -2,8 +2,8 @@ import { ElevenLabsClient } from "elevenlabs";
 import { env } from "./env";
 const client = new ElevenLabsClient();
 
-export async  function elevenLabs(text:string){
-  
+export async function elevenLabs(text: string) {
+
   const audio = await client.textToSpeech.convert("nPczCjzI2devNBz1zQrb", {
     text: `${text}.`,
     model_id: "eleven_multilingual_v2",
@@ -12,7 +12,7 @@ export async  function elevenLabs(text:string){
     apiKey: env.ELEVENLABS_API_KEY
   });
 
- 
+
   const audioChunks: Buffer[] = [];
 
   for await (const chunk of audio) {
