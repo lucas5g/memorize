@@ -1,6 +1,6 @@
-import { PhraseService } from "@/services/phrase.service";
+import { PhraseService } from '@/services/phrase.service';
 
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 describe('PhraseService', () => {
   const service = new PhraseService();
@@ -10,11 +10,11 @@ describe('PhraseService', () => {
 
     expect(res).toMatchObject({
       english: 'I want drink water.',
-      portuguese: 'Quero beber água.'
+      portuguese: 'Quero beber água.',
     });
 
-    console.log(res)
-    id = res.id
+    console.log(res);
+    id = res.id;
   });
 
   afterAll(async () => {

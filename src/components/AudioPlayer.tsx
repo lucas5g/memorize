@@ -1,18 +1,20 @@
-"use client"; // Diz ao Next.js que este componente roda no lado do cliente
+'use client'; // Diz ao Next.js que este componente roda no lado do cliente
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface AudioPlayerProps {
   audioBuffer: Uint8Array; // Recebe o Buffer do áudio como prop
 }
 
-export default function AudioPlayer({ audioBuffer }: Readonly<AudioPlayerProps>) {
+export default function AudioPlayer({
+  audioBuffer,
+}: Readonly<AudioPlayerProps>) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (audioBuffer) {
       // Converte o Buffer para Blob
-      const blob = new Blob([audioBuffer], { type: "audio/mpeg" });
+      const blob = new Blob([audioBuffer], { type: 'audio/mpeg' });
 
       // Cria uma URL temporária para o áudio
       const url = URL.createObjectURL(blob);
@@ -21,9 +23,6 @@ export default function AudioPlayer({ audioBuffer }: Readonly<AudioPlayerProps>)
       return () => URL.revokeObjectURL(url);
     }
   }, [audioBuffer]);
-
-
-
 
   if (!audioUrl) return <p>Carregando áudio...</p>;
 

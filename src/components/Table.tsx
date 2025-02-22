@@ -1,9 +1,9 @@
-import { Phrase, Word } from "@prisma/client"
-import { Card } from "./Card"
-import AudioPlayer from "./AudioPlayer"
+import { Phrase } from '@prisma/client';
+import { Card } from './Card';
+import AudioPlayer from './AudioPlayer';
 
 interface Props {
-  phrases: Phrase[]
+  phrases: Phrase[];
 }
 export function Table({ phrases }: Readonly<Props>) {
   return (
@@ -18,10 +18,7 @@ export function Table({ phrases }: Readonly<Props>) {
         </thead>
         <tbody>
           {phrases.map((row) => (
-            <tr
-              key={row.id}
-              className='border-b last:border-0'
-            >
+            <tr key={row.id} className="border-b last:border-0">
               <td>{row.english}</td>
               <td>{row.portuguese}</td>
               <td>
@@ -32,5 +29,5 @@ export function Table({ phrases }: Readonly<Props>) {
         </tbody>
       </table>
     </Card>
-  )
+  );
 }
