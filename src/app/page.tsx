@@ -3,26 +3,14 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
 import { Table } from '@/components/Table';
-import { phraseCreateSchema, PhraseService } from '@/services/phrase.service';
-import { create } from 'domain';
-import { revalidateTag, unstable_cache } from 'next/cache';
+import { PhraseService } from '@/services/phrase.service';
 
 
 const phraseService = new PhraseService();
 
-const getPhrases = unstable_cache(async () => {
-  return phraseService.findMany();
-},
-  ['phrases'],
-  {
-    tags: ['phrases']
-  });
-
-
 export default async function Home() {
 
-  const phrases = await getPhrases();
-  // const phrases = await phraseService.findMany();
+  const phrases = await phraseService.findMany();
 
   return (
     <>
@@ -35,8 +23,8 @@ export default async function Home() {
       <main className='flex gap-4 md:flex-col'>
 
         <Card>
-          <form className='space-y-3' action={createPhrase}>
-            <Input label="Inglês" name='english' />
+          <form className='flex gap-2' action={createPhrase}>
+            <Input  name='english' placeholder='Adicione a frase em Inglês' />
             <Button label='Salvar' />
           </form>
         </Card>

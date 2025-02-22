@@ -1,7 +1,6 @@
 import { elevenLabs } from "@/utils/eleven-labs";
 import { prisma } from "@/utils/prisma";
 import { translate } from "@/utils/translate";
-import { setTimeout } from "timers/promises";
 import { z } from "zod";
 
 export const phraseCreateSchema = z.object({
@@ -18,10 +17,8 @@ export class PhraseService {
     return prisma.phrase.create({
       data: {
         english,
-        portuguese: 'test',
-        audio: Buffer.from('test')
-        // portuguese: await translate(english),
-        // audio: await elevenLabs(english)
+        portuguese: await translate(english),
+        audio: await elevenLabs(english)
       }
     })
   }
