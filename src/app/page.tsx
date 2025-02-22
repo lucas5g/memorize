@@ -1,7 +1,5 @@
-import { createPhrase } from '@/app/actions';
-import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-import { Input } from '@/components/Input';
+import { Form } from '@/components/Form';
 import { Table } from '@/components/Table';
 import { PhraseService } from '@/services/phrase.service';
 
@@ -11,22 +9,12 @@ export default async function Home() {
   const phrases = await phraseService.findMany();
 
   return (
-    <>
-      <h1>Memorize</h1>
-
+    <main className="flex gap-2 md:flex-col">
       <Card>
-        <h1>Teste card</h1>
+        <h1 className='text-2xl mb-2'>Memorize</h1>
+        <Form />
       </Card>
-
-      <main className="flex gap-4 md:flex-col">
-        <Card>
-          <form className="flex gap-2" action={createPhrase}>
-            <Input name="english" placeholder="Adicione a frase em Inglês" />
-            <Button label="Salvar" />
-          </form>
-        </Card>
-        <Table phrases={phrases} />
-      </main>
-    </>
+      <Table phrases={phrases} />
+    </main>
   );
 }
