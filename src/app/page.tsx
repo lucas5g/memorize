@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <main className="flex gap-2 md:flex-col">
       <Card>
-        <h1 className='text-2xl mb-2'>Memorize</h1>
+        <h1 className="text-2xl mb-2">Memorize</h1>
         <Form />
       </Card>
       <Table phrases={phrases} />
