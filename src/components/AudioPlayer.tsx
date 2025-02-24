@@ -1,5 +1,6 @@
 'use client'; // Diz ao Next.js que este componente roda no lado do cliente
 
+import { Button } from '@/components/Button';
 import { Pause, Play } from '@phosphor-icons/react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -39,7 +40,7 @@ export default function AudioPlayer({
     setIsPlaying(!isPlaying);
   }
 
-  if (!audioUrl) return <p>Carregando áudio...</p>;
+  if (!audioUrl) return <Button disabled={true} />;
 
   return (
     <>
@@ -52,7 +53,7 @@ export default function AudioPlayer({
       ></audio>
       <button
         onClick={togglePlayPause}
-        className="bg-gray-800 p-3 rounded-full border border-gray-600 hover:bg-gray-950 "
+        className="bg-gray-950 p-3 rounded-full border border-gray-600 hover:border-lime-100"
       >
         {isPlaying ? <Pause /> : <Play />}
       </button>

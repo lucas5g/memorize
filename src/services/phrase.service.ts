@@ -12,11 +12,16 @@ export class PhraseService {
   async create(create: z.infer<typeof phraseCreateSchema>) {
     const { english } = phraseCreateSchema.parse(create);
 
+    const [portuguese, audio] = await Promise.all([
+      translate(english),
+      elevenLabs(english),
+    ]);
+
     return prisma.phrase.create({
       data: {
         english,
-        portuguese: await translate(english),
-        audio: await elevenLabs(english),
+        portuguese,
+        audio,
       },
     });
   }

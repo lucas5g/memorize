@@ -9,16 +9,16 @@ export function Table({ phrases }: Readonly<Props>) {
   return (
     <Card>
       <table className="w-full">
-        <thead className="pb-2">
+        <thead className="p-2">
           <tr className="text-left">
-            <th>Inglês/Português</th>
+            <th className='p-2'>Inglês/Português</th>
             <th>Áudio</th>
           </tr>
         </thead>
         <tbody>
           {phrases.map((row) => (
-            <tr key={row.id} className="border-b last:border-0">
-              <td className="py-2">
+            <tr key={row.id} className="border-b last:border-0 hover:bg-gray-800">
+              <td className="p-2">
                 {row.english}
                 <br />
                 <i>{row.portuguese}</i>
