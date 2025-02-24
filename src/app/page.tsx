@@ -6,7 +6,7 @@ import { PhraseService } from '@/services/phrase.service';
 const phraseService = new PhraseService();
 
 export default async function Home() {
-  const { data } = await phraseService.findMany();
+  const { data } = await phraseService.findMany({});
 
   return (
     <main className='flex gap-2 xl:flex-row flex-col'>

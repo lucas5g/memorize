@@ -32,7 +32,7 @@ export class PhraseService {
     });
   }
 
-  async findMany(paramns?: z.infer<typeof phraseParamnSchema>) {
+  async findMany(paramns: z.infer<typeof phraseParamnSchema>) {
     const { take, skip } = phraseParamnSchema.parse(paramns);
 
     const [data, count] = await Promise.all([
