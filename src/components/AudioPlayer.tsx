@@ -53,9 +53,9 @@ export default function AudioPlayer({
       ></audio>
       <button
         onClick={togglePlayPause}
-        className="bg-gray-950 p-3 rounded-full border border-gray-600 hover:border-lime-100"
+        className="bg-gray-950 p-3 rounded-full border border-gray-600 hover:border-red-100"
       >
-        {isPlaying ? <Pause /> : <Play />}
+        {isPlaying ? <Pause className='text-red-200' /> : <Play />}
       </button>
     </>
   );

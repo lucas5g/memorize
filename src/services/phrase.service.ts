@@ -8,6 +8,10 @@ export const phraseCreateSchema = z.object({
   portuguese: z.string().optional(),
 });
 
+const phraseParamnSchema = z.object({
+  take: z.number().optional(),
+  skip: z.number().optional(),
+})
 export class PhraseService {
   async create(create: z.infer<typeof phraseCreateSchema>) {
     const { english } = phraseCreateSchema.parse(create);
@@ -26,12 +30,25 @@ export class PhraseService {
     });
   }
 
-  findMany() {
-    return prisma.phrase.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
+  async findMany(paramns?: z.infer<typeof phraseParamnSchema>) {
+    const { take, skip } = phraseParamnSchema.parse(paramns);
+
+    const [data, count] = await Promise.all([
+      prisma.phrase.findMany({
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take,
+        skip
+      }),
+      prisma.phrase.count(),
+    ])
+
+    return { data, count };
+  }
+
+  async findManyCount() {
+    return prisma.phrase.count();
   }
 
   findOne(id: number) {
