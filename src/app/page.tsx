@@ -6,7 +6,7 @@ import { PhraseService } from '@/services/phrase.service';
 const phraseService = new PhraseService();
 
 export default async function Home() {
-  const phrases = await phraseService.findMany();
+  const { data } = await phraseService.findMany();
 
   return (
     <main className="flex gap-2 xl:flex-row flex-col">
@@ -14,7 +14,7 @@ export default async function Home() {
         <h1 className="text-2xl mb-2">Memorize</h1>
         <Form />
       </Card>
-      <Table phrases={phrases} />
+      <Table phrases={data} />
     </main>
   );
 }
