@@ -8,10 +8,12 @@ export const phraseCreateSchema = z.object({
   portuguese: z.string().optional(),
 });
 
-const phraseParamnSchema = z.object({
-  take: z.number().optional(),
-  skip: z.number().optional(),
-});
+const phraseParamnSchema = z
+  .object({
+    take: z.number(),
+    skip: z.number(),
+  })
+  .partial();
 export class PhraseService {
   async create(create: z.infer<typeof phraseCreateSchema>) {
     const { english } = phraseCreateSchema.parse(create);

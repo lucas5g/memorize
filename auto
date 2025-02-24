@@ -1,0 +1,27 @@
+
+message=$1 
+git pull
+
+npm run lint
+status=$?
+
+if [ "$status" != 0 ]; then
+    echo "Erro no lint"
+    exit 
+fi
+
+# sleep 1
+
+# npm run test 
+# status=$?
+
+# if [ "$status" != 0 ]; then
+#     echo "Erro nos tests"
+#     exit 
+# fi
+
+git add .
+git commit -m "$message" --no-verify
+git push
+
+echo $message%                                                                                        
