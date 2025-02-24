@@ -5,7 +5,7 @@ export function Input({
     <input
       id={props.name}
       {...props}
-      className="bg-gray-800 h-10 rounded p-3 w-full focus:outline-none focus:border hover:border "
+      className='bg-gray-800 h-10 rounded p-3 w-full focus:outline-none focus:border hover:border '
     />
   );
 }

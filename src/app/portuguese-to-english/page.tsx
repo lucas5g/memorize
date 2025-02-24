@@ -1,14 +1,13 @@
-import { PhraseService } from "@/services/phrase.service";
-import { randomInt } from "crypto";
+import { PhraseService } from '@/services/phrase.service';
+import { randomInt } from 'crypto';
 
 const service = new PhraseService();
 export default async function PortugueseToEnglish() {
-
   const count = await service.findManyCount();
 
   const { data } = await service.findMany({
     take: 5,
-    skip: randomInt(count - 5)
+    skip: randomInt(count - 5),
   });
 
   const phrase = data[randomInt(5)];
@@ -24,9 +23,8 @@ export default async function PortugueseToEnglish() {
               <td>{row.english}</td>
             </tr>
           ))}
-
         </tbody>
       </table>
     </>
-  )
+  );
 }

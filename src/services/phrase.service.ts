@@ -11,7 +11,7 @@ export const phraseCreateSchema = z.object({
 const phraseParamnSchema = z.object({
   take: z.number().optional(),
   skip: z.number().optional(),
-})
+});
 export class PhraseService {
   async create(create: z.infer<typeof phraseCreateSchema>) {
     const { english } = phraseCreateSchema.parse(create);
@@ -39,10 +39,10 @@ export class PhraseService {
           createdAt: 'desc',
         },
         take,
-        skip
+        skip,
       }),
       prisma.phrase.count(),
-    ])
+    ]);
 
     return { data, count };
   }
