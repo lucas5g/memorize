@@ -11,16 +11,18 @@ export function Table({ phrases }: Readonly<Props>) {
       <table className="w-full">
         <thead className="pb-2">
           <tr className="text-left">
-            <th>Inglês</th>
-            <th>Português</th>
-            <th>Audio</th>
+            <th>Inglês/Português</th>
+            <th>Áudio</th>
           </tr>
         </thead>
         <tbody>
           {phrases.map((row) => (
             <tr key={row.id} className="border-b last:border-0">
-              <td>{row.english}</td>
-              <td>{row.portuguese}</td>
+              <td className="py-2">
+                {row.english}
+                <br />
+                <i>{row.portuguese}</i>
+              </td>
               <td>
                 <AudioPlayer audioBuffer={row.audio} />
               </td>

@@ -19,7 +19,7 @@ export function Form() {
   return (
     <form className="flex gap-2" action={createPhrase}>
       <Input name="english" placeholder="Adicione a frase em Inglês" />
-      <Button label="Salvar" />
+      <Button>Salvar</Button>
     </form>
   );
 }

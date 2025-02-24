@@ -3,11 +3,9 @@
 import { CircleNotch } from '@phosphor-icons/react';
 import { useFormStatus } from 'react-dom';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
-}
-
-export function Button(props: Readonly<Props>) {
+export function Button(
+  props: Readonly<React.ButtonHTMLAttributes<HTMLButtonElement>>,
+) {
   //
   const { pending } = useFormStatus();
 
@@ -17,7 +15,7 @@ export function Button(props: Readonly<Props>) {
       disabled={pending}
       {...props}
     >
-      {!pending && props.label}
+      {!pending && props.children}
       {pending && (
         <CircleNotch
           size={22}
