@@ -11,7 +11,7 @@ export function Button(
 
   return (
     <button
-      className='bg-gray-950  rounded w-24 h-10  hover:border disabled:bg-gray-800 flex items-center justify-center gap-2'
+      className='bg-gray-950  rounded w-24 h-12  hover:border disabled:bg-gray-800 flex items-center justify-center gap-2'
       disabled={pending}
       {...props}
     >
