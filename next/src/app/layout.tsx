@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-br'>
-      <body className={`${roboto.className} body`}>
+      <body className={`${roboto.className} bg-gray-700 text-gray-100 xl:p-20 p-3 space-y-4`}>
         <Nav />
         {children}
       </body>
