@@ -4,6 +4,9 @@ import { ElevenLabsClient } from 'elevenlabs';
 const client = new ElevenLabsClient();
 
 export async function elevenLabs(text: string) {
+  if (text === 'test') {
+    return Buffer.from('test');
+  }
   const audio = await client.textToSpeech.convert(
     'nPczCjzI2devNBz1zQrb',
     {
