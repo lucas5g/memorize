@@ -50,14 +50,22 @@ describe('PhraseService', () => {
     expect(res).toHaveProperty('english', 'test')
   })
 
-  it.only('findAll', async () => {
+  it('findAll', async () => {
 
     const res = await service.findAll();
-    console.log(res[0])
+    console.log(JSON.stringify(res, null, 2))
 
     for (const property of properties) {
       expect(res[0]).toHaveProperty(property);
     }
-
   });
+
+  it('findOne', async () => {  
+
+    const res = await service.findOne(id);
+
+    for (const property of properties) {
+      expect(res).toHaveProperty(property);
+    }
+  })
 });

@@ -27,41 +27,33 @@ export class PhraseService {
       }
     })
 
-    console.log(tagCreated)
-
-
     const data: Prisma.PhraseCreateInput = {
       english,
       audio,
       portuguese,
-      tags: {
-        connect: {
-          tagId: tagCreated.id
-        }
-      }
-      // tags: {
-      //   connect: [
-      //     {
-
-      //       // tagId: tagCreated.id
-      //     }
-      //   ]
-      // tagId: tagCreated.id
-      // tagId: tagCreated.id
-      // tag:{
-      //   name: tag
-      // }
-      // }
-      // }
     }
 
-    return this.prisma.phrase.upsert({
+    const phrase = await this.prisma.phrase.upsert({
       create: data,
       update: data,
       where: {
         english,
+      },
+      include: {
+        tags: true
       }
     });
+
+    if (!phrase.tags.some(row => row.tagId === tagCreated.id)) {
+      await this.prisma.phraseTag.create({
+        data: {
+          phraseId: phrase.id,
+          tagId: tagCreated.id
+        }
+      })
+    }
+    
+    return phrase;
   }
 
   findAll() {
@@ -73,7 +65,11 @@ export class PhraseService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} phrase`;
+    return this.prisma.phrase.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   update(id: number, updatePhraseDto: UpdatePhraseDto) {
