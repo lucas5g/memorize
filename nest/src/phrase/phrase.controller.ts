@@ -3,7 +3,7 @@ import { PhraseService } from './phrase.service';
 import { CreatePhraseDto } from './dto/create-phrase.dto';
 import { UpdatePhraseDto } from './dto/update-phrase.dto';
 
-@Controller('phrase')
+@Controller('phrases')
 export class PhraseController {
   constructor(private readonly phraseService: PhraseService) {}
 
