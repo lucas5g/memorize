@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PhraseTag {
+  tagId    Int
+  phraseId Int
+  phrases  Phrase @relation(fields: [phraseId], references: [id])
+  tags      Tag     @relation(fields: [tagId], references: [id])
+
+  @@id([tagId, phraseId])
+}
+
+model Tag {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now())
+  phrases   PhraseTag[]
+}
+
+model Phrase {
+  id         Int         @id(map: "Phrase_pkey") @default(autoincrement())
+  english    String      @unique(map: "Phrase_english_key")
+  portuguese String
+  audio      Bytes
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now())
+  tags  PhraseTag[]
+}
