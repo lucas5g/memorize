@@ -54,8 +54,37 @@ export class PhraseService {
 
   }
 
-  findAll(){
-    return prisma.phrase.findMany()
+  async findAll({tag, ...query}: any) {
+    const res = await prisma.phrase.findMany({
+      where: {
+        tags: {
+          some: {
+            tags: {
+              name: tag
+            }
+          }
+        },
+        ...query,
+      },
+      select:{
+        id: true,
+        english: true,
+        portuguese: true
+      },
+      take:50
+    })
+    return res.map(row => ({
+      ...row,
+      audio: `http://localhost:3000/audios/${row.id}.mp3`
+    }))
+  }
+
+  findOne(id: number) {
+    return prisma.phrase.findUnique({
+      where: {
+        id
+      }
+    })
   }
 
 }
