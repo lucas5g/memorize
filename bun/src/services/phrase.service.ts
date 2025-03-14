@@ -1,7 +1,7 @@
-import type { Prisma } from "@prisma/client"
-import { elevenLabs } from "../utils/eleven-labs"
-import { prisma } from "../utils/prisma"
-import { translate } from "../utils/translate"
+import { elevenLabs } from "@/utils/eleven-labs";
+import { prisma } from "@/utils/prisma";
+import { translate } from "@/utils/translate";
+import { Prisma } from "@prisma/client";
 
 export class PhraseService {
   async create({ english, tag }: any) {
@@ -54,24 +54,24 @@ export class PhraseService {
 
   }
 
-  async findAll({tag, ...query}: any) {
+  async findAll({ tag, ...query }: any) {
     const res = await prisma.phrase.findMany({
       where: {
         tags: {
           some: {
-            tags: {
+            Tag: {
               name: tag
             }
           }
         },
         ...query,
       },
-      select:{
+      select: {
         id: true,
         english: true,
         portuguese: true
       },
-      take:50
+      take: 50
     })
     return res.map(row => ({
       ...row,

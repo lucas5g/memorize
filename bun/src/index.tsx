@@ -1,11 +1,11 @@
-import index from './index.html'
-import { PhraseService } from './services/phrase.service'
+import index from "./index.html";
+import { PhraseService } from "@/services/phrase.service";
 
 const phraseService = new PhraseService()
 
-Bun.serve({
+const server = Bun.serve({
   routes: {
-    '/': index,
+    "/*": index,
     '/phrases': {
       async GET(req) {
         const url = new URL(req.url)
@@ -40,7 +40,8 @@ Bun.serve({
         }
       })
     }
-  }
-})
+  },
+  development: process.env.NODE_ENV !== "production",
+});
 
-console.log('Server Run! http://localhost:3000')
+console.log(`🚀 Server running at ${server.url}`);
