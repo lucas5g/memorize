@@ -4,7 +4,6 @@ import { PhraseService } from './services/phrase.service'
 const phraseService = new PhraseService()
 
 Bun.serve({
-  port: 3000,
   routes: {
     '/': index,
     '/phrases': {
@@ -34,7 +33,7 @@ Bun.serve({
     '/audios/:id.mp3': async (req) => {
 
       const id = req.params['id.mp3'].split('.')[0]
-      const phrase = await phraseService.findOne(Number(id))    
+      const phrase = await phraseService.findOne(Number(id))
       return new Response(phrase?.audio, {
         headers: {
           'Content-Type': 'audio/mpeg'
