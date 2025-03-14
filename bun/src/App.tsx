@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Card } from "@/components/card";
+import { Card } from "@/components/Card";
+import { Input } from "@/components/Input";
+import { Button } from "@/components/Button";
+import AudioPlayer from "@/components/AudioPlayer";
 
 export function App() {
 
@@ -34,15 +37,19 @@ export function App() {
   }
 
   return (
-    <div className="bg-gray-500 h-screen text-white space-y-3 p-5">
+    <div className="bg-gray-500 min-h-screen text-white space-y-3 p-5">
       <h1>Memorize</h1>
 
       <Card>
         <h2>Create</h2>
-        <form onSubmit={createPhrase}>
-          <input type="text" name="english" placeholder="English" />
-          <input type="text" name="tag" placeholder="Tag" />
-          <button type="submit">Create</button>
+        <form
+          onSubmit={createPhrase}
+          className="flex flex-col gap-2"
+        >
+          <Input name="english" placeholder="English" />
+          <Input name="tag" placeholder="Tag" />
+          <Button type="submit">Save</Button>
+
         </form>
       </Card>
 
@@ -51,7 +58,7 @@ export function App() {
         <form onSubmit={(event) => {
           event.preventDefault()
 
-          const tag = event.target.tag.value
+          const tag = event.target.searchTag.value
 
           fetch(`/phrases?tag=${tag}`)
             .then(res => res.json())
@@ -59,11 +66,11 @@ export function App() {
 
         }
         }>
-          <input type="text" name="tag" placeholder="Buscar por tag" />
+          <Input name="searchTag" placeholder="Search by Tag" />
         </form>
-        <table>
+        <table className="w-full">
           <thead>
-            <tr>
+            <tr className="text-left ">
               <th>English</th>
               <th>Portuguese</th>
               <th>Audio</th>
@@ -71,10 +78,16 @@ export function App() {
           </thead>
           <tbody>
             {phrases.map((phrase: any) => (
-              <tr key={phrase.id}>
-                <td>{phrase.english}</td>
+              <tr
+                key={phrase.id}
+                className="border-b last:border-0 hover:bg-gray-800 "
+              >
+                <td className="py-4">{phrase.english}</td>
                 <td>{phrase.portuguese}</td>
-                <td><audio src={`/audios/${phrase.id}.mp3`} controls /></td>
+                <td>
+                  <AudioPlayer phraseId={phrase.id} />
+                  {/* <audio src={`/audios/${phrase.id}.mp3`} controls /> */}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -6,11 +6,12 @@
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "scripts": {
-    "dev": "bun --hot src/index.tsx",
+    "dev": "bun --watch src/index.tsx",
     "start": "NODE_ENV=production bun src/index.tsx",
     "build": "bun run build.ts"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
     "@prisma/client": "^6.5.0",
     "bun-plugin-tailwind": "^0.0.14",
     "elevenlabs": "^1.54.0",
