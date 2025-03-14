@@ -1,4 +1,13 @@
 {
+  "name": "bun",
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/main.ts",
+    "start": "bun run src/main.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.5.0",
     "elevenlabs": "^1.54.0",
@@ -11,10 +20,5 @@
     "@types/bun": "^1.2.5",
     "@types/react-dom": "^19.0.4",
     "prisma": "^6.5.0"
-  },
-  "name": "bun",
-  "private": true,
-  "peerDependencies": {
-    "typescript": "^5"
   }
 }
