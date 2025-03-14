@@ -36,7 +36,7 @@ export function App() {
     })
       .then(res => res.json())
       .then(data => {
-        setPhrases([...phrases, data])
+        setPhrases([data, ...phrases])
         event.target.reset()
 
       })
