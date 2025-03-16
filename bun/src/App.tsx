@@ -8,6 +8,8 @@ import AudioPlayer from "@/components/AudioPlayer";
 interface PhraseInterface {
   id: number,
   english: string,
+  portuguese: string,
+
   tag: string
 }
 
@@ -86,19 +88,22 @@ export function App() {
           <table className="w-full">
             <thead>
               <tr className="text-left ">
-                <th>English</th>
-                <th>Portuguese</th>
+                <th>English/Portuguese</th>
                 <th>Audio</th>
               </tr>
             </thead>
             <tbody>
-              {phrases.map((phrase: any) => (
+              {phrases.map(phrase => (
                 <tr
                   key={phrase.id}
                   className="border-b last:border-0 hover:bg-gray-800 "
                 >
-                  <td className="py-4">{phrase.english}</td>
-                  <td>{phrase.portuguese}</td>
+                  <td className="py-4">
+                    {phrase.english} <br />
+                    <i>
+                      {phrase.portuguese}
+                    </i>
+                  </td>
                   <td>
                     <AudioPlayer phraseId={phrase.id} />
                     {/* <audio src={`/audios/${phrase.id}.mp3`} controls /> */}

@@ -6,7 +6,7 @@ const phraseService = new PhraseService()
 const server = Bun.serve({
   routes: {
     "/*": index,
-    '/version': () => new Response('1.0.0'),
+    '/version': () => new Response('0.3.16'),
     '/phrases': {
       async GET(req) {
         const url = new URL(req.url)
